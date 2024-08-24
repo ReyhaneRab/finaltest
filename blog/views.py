@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from blog.models import *
 
@@ -13,15 +13,12 @@ def post_list(request):
     contex = {
         'posts': posts
     }
-    return render(request, 'template1.html', contex)
+    return render(request, 'blog/list.html', contex)
 
 
 def post_detail(request, id):
-    try:
-        post = Post.published.get(id=id)
-    except:
-        raise Http404('No Post Found!')
+    post = get_object_or_404(Post, id=id, status=Post.Status.PUBLISHED)
     contex = {
         'post': post
     }
-    return render(request, 'template2.html', contex)
+    return render(request, 'blog/detail.html', contex)
