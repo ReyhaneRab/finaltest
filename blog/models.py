@@ -39,3 +39,11 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', args=[self.id])
+
+
+class Ticket(models.Model):
+    message = models.TextField(verbose_name='پیام')
+    name = models.CharField(max_length=250, verbose_name='نام')
+    email = models.EmailField(verbose_name='ایمیل')
+    phone = models.CharField(max_length=11, verbose_name='شماره تماس')
+    subject = models.CharField(max_length=250, verbose_name='موضوع')
